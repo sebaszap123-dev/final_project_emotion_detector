@@ -17,8 +17,10 @@ def emotion_detector(text_to_analyze: str):
         json = resp.json()
         emotions = json["emotionPredictions"][0]["emotion"]
         return _find_dominant_emotion(emotions)
+    if resp.status_code == 400:
+        return _blank_response()
 
-    return _blank_response()
+    raise NotImplementedError
 
 
 def _blank_response():
